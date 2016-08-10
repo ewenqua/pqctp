@@ -1,0 +1,12 @@
+
+windows vc 2013, error: Unable to find vcvarsall.bat
+在“..python安装路径...\Lib\distutils目录下有个msvc9compiler.py找到243行
+
+        #toolskey = "VS%0.f0COMNTOOLS" % version
+        toolskey = "VS120COMNTOOLS"
+
+
+
+
+
+  
