@@ -1,4 +1,8 @@
-# pyctp
-A derived version from SMTH pyctp
+# pqctp
+python quant CTP
+Derived from SMTH pyctp; re-design, modify, trim it
 
-整理、裁剪、修改pyctp2。
+
+
+
+
