@@ -1,10 +1,10 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
+*.py[co]
 *$py.class
 
 # C extensions
-*.so
+#*.so
 
 # Distribution / packaging
 .Python
@@ -87,3 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+logs/
+ticks/
