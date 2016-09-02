@@ -1,6 +1,7 @@
 # pqctp
 =====
 python quant CTP
+qq交流群:273182530
 
 用法
 =====
