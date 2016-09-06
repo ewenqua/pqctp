@@ -33,8 +33,10 @@ https://github.com/zaviichen/pheux
 如果自行编译库文件，python setup.py build
 
 win32下:
+-----
 error: Unable to find vcvarsall.bat
 -- 如果你安装的是 vc 2012版 SET VS90COMNTOOLS=%VS110COMNTOOLS%
 -- 如果你安装的是 vc 2013版 SET VS90COMNTOOLS=%VS120COMNTOOLS%
 linux64下：
+-----
 可能需要安装g++ 和 python-dev
