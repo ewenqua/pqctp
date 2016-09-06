@@ -9,7 +9,10 @@ QQ交流群：273182530
 环境：Windows 7 32位，或Linux 64位，python 2.7；其它环境可能有问题
 库文件和源文件在一起，可以直接使用
 
-运行：pqctp目录下，执行 python main.py
+运行：pqctp目录下，
+执行 python SyncDayBar.py  #下载补全日K线
+完成后，
+执行 python main.py
 
 功能：实现2个简单策略，只测试过模拟盘，实盘前需要仔细测试！
 
