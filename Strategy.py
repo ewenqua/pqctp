@@ -18,8 +18,14 @@ class Strategy():
     traderSpi = None #TraderDelegate()
     strategy_state = {}
 
-    def __init__(self, tick):
+    def __init__(self, inst):
+        self.inst = inst
+
+    def setTick(self, tick):
         self.tick = tick
+
+    def InitIndicator(self):
+        raise Exception('Implement Exception','InitInitcator should be implement for customized strategy!')
 
     @staticmethod
     def setTraderSpi(spi):
@@ -32,7 +38,7 @@ class Strategy():
         Strategy.traderSpi.ReqOrderInsert(order, Strategy.traderSpi.inc_request_id())
         DatabaseController.insert_SendOrder(order)
 
-        print 'sendOrder = ' + order.InstrumentID
+        print 'sendOrder = ' + order.InstrumentID + ' dir = ' + order.Direction + ' strategy = ' + self.__module__
         time.sleep(1)
         mutex.release()
 
@@ -58,8 +64,6 @@ class Strategy():
             TimeCondition=ApiStruct.TC_GFD,
         )
 
-    def getDayBarList(self):
-        return database_map[self.tick.InstrumentID][suffix_list.index('_DayBar')]
     def getSendOrderCount(self):
         sendorder_list = database_map[self.tick.InstrumentID][suffix_list.index('_SendOrder')]
         pos_buy, pos_sell = (0, 0)

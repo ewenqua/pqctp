@@ -1,35 +1,19 @@
 #-*- coding:utf-8 -*-
 
-import threading
 import time
 from datetime import datetime
 from copy import deepcopy
 import os
 from Strategy import Strategy
-from StrategyRBreaker import StrategyRBreaker
-from StrategyFairyFour import StrategyFairyFour
 from FinalLogger import logger
 from DatabaseController import DatabaseController
-from Constant import inst_strategy, TICK_DIR
+from Constant import TICK_DIR, inst_thread
 
 class TickController():
     inst_current_tick = {}
 
     def __init__(self):
         pass
-
-    @staticmethod
-    def selectStrategy(tick):
-        strategy = None
-        if inst_strategy[tick.InstrumentID] == 'StrategyRBreaker':
-            strategy = StrategyRBreaker(tick)
-        elif inst_strategy[tick.InstrumentID] == 'StrategyFairyFour':
-            # add more strategy
-            strategy = StrategyFairyFour(tick)
-        else:
-            print 'The strategy is not found! '
-
-        return strategy
 
     @staticmethod
     def processTick(t):
@@ -40,10 +24,13 @@ class TickController():
             Strategy.strategy_state[tick.InstrumentID] = False
 
         if Strategy.strategy_state[tick.InstrumentID] == False :
-            strategy = TickController.selectStrategy(tick)
-            strategy.start()
-            #strategy.join()
-
+            strategy = inst_thread[tick.InstrumentID]
+            strategy.setTick(tick)
+            try:
+                strategy.start()
+            except Exception, e:
+                print 'Ignore:', e
+        #save ticks of every inst
         TickController.inst_current_tick[tick.InstrumentID] = tick
         TickController.saveTick(tick)
 
@@ -68,6 +55,8 @@ class TickController():
         for inst in TickController.inst_current_tick.keys() :
             tick = TickController.inst_current_tick[inst]
             DatabaseController.insert_DayBar(tick)
+            #update all indicators!!!
+            inst_thread[inst].InitIndicator()
 
 
 
